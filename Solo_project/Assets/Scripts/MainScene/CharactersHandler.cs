@@ -5,13 +5,16 @@ public class CharactersHandler : MonoBehaviour
     protected Rigidbody2D _rigidbody;
 
     [SerializeField] private SpriteRenderer characterRenderer;
-    [SerializeField] private Transform weaponPivot;
+    //[SerializeField] private Transform weaponPivot;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
 
     protected Vector2 lookDirection = Vector2.zero;
     public Vector2 LookDirection { get { return lookDirection; } }
+
+    //protected int characterSpeed;
+    //public int CharacterSpeed { get { return characterSpeed; } }
 
     private Vector2 knockback = Vector2.zero;
     private float knockbackDuration = 0.0f;
@@ -69,10 +72,10 @@ public class CharactersHandler : MonoBehaviour
 
         characterRenderer.flipX = isLeft;
 
-        if (weaponPivot != null)
-        {
-            weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-        }
+        //if (weaponPivot != null)
+        //{
+        //    weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
+        //}
     }
 
     public void ApplyKnockback(Transform other, float power, float duration)
