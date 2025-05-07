@@ -1,23 +1,17 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class Player : Characters
+public class PlayerHandler : CharactersHandler
 {
-    
+    private Camera camera;
 
-    // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-    }
+        camera = Camera.main;
 
-    // Update is called once per frame
-    protected override void Update()
-    {
-        
     }
 
     protected override void Move()
@@ -27,8 +21,7 @@ public class Player : Characters
         movementDirection = new Vector2(horizontal, vertical).normalized;
 
         Vector2 mousePosition = Input.mousePosition;
-        Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePosition);
-        
+        Vector2 worldPos = camera.ScreenToWorldPoint(mousePosition);
         lookDirection = (worldPos - (Vector2)transform.position);
 
         if (lookDirection.magnitude < .9f)
@@ -39,7 +32,6 @@ public class Player : Characters
         {
             lookDirection = lookDirection.normalized;
         }
+
     }
-
-
 }

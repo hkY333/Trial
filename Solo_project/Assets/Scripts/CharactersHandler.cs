@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Characters : MonoBehaviour
+public class CharactersHandler : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
 
     [SerializeField] private SpriteRenderer characterRenderer;
+    [SerializeField] private Transform weaponPivot;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
@@ -17,14 +16,17 @@ public abstract class Characters : MonoBehaviour
     private Vector2 knockback = Vector2.zero;
     private float knockbackDuration = 0.0f;
 
+    protected AnimationHandler animationHandler;
+
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        animationHandler = GetComponent<AnimationHandler>();
     }
 
     protected virtual void Start()
     {
-        
+
     }
 
     protected virtual void Update()
@@ -35,16 +37,19 @@ public abstract class Characters : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        Movment(movementDirection);
+        Movement(movementDirection);
         if (knockbackDuration > 0.0f)
         {
             knockbackDuration -= Time.fixedDeltaTime;
         }
     }
 
-    protected abstract void Move();
+    protected virtual void Move()
+    {
 
-    private void Movment(Vector2 direction)
+    }
+
+    private void Movement(Vector2 direction)
     {
         direction = direction * 5;
         if (knockbackDuration > 0.0f)
@@ -54,6 +59,7 @@ public abstract class Characters : MonoBehaviour
         }
 
         _rigidbody.velocity = direction;
+        animationHandler.Move(direction);
     }
 
     private void Rotate(Vector2 direction)
@@ -63,10 +69,10 @@ public abstract class Characters : MonoBehaviour
 
         characterRenderer.flipX = isLeft;
 
-        //if (weaponPivot != null)
-        //{
-        //    weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-        //}
+        if (weaponPivot != null)
+        {
+            weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
+        }
     }
 
     public void ApplyKnockback(Transform other, float power, float duration)
