@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 13bee7752b57226439153ca3e0530d71
+  - enabled: 1
+    path: Assets/Scenes/FlappyScene.unity
+    guid: 5ddfedd1bc7ec53409ab7abc9ece6c06
   m_configObjects: {}
