@@ -20,18 +20,9 @@ public class PlayerHandler : CharactersHandler
         float vertical = Input.GetAxisRaw("Vertical");
         movementDirection = new Vector2(horizontal, vertical).normalized;
         
-
-        Vector2 mousePosition = Input.mousePosition;
-        Vector2 worldPos = camera.ScreenToWorldPoint(mousePosition);
-        lookDirection = (worldPos - (Vector2)transform.position);
-
-        if (lookDirection.magnitude < .9f)
+        if(Mathf.Abs(horizontal) > 0.01)
         {
-            lookDirection = Vector2.zero;
-        }
-        else
-        {
-            lookDirection = lookDirection.normalized;
+            lookDirection = new Vector2(horizontal, 0).normalized;
         }
 
     }
